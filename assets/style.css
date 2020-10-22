@@ -9,31 +9,70 @@ body {
     font-family: sans-serif;
 }
 /* navigation */
-nav {
+
+header {
+    padding: 5px 0;
+    /* display: table; */
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    justify-content: center;
-    background-color: rgb(240, 240, 240);
-    padding: 20px 0;
-    border: 4px solid rgb(150, 150, 150);
-    border-radius: 7.5px;
+    position: relative;
+}
+
+.title {
+    margin-left: 50px;
 }
 
 .nyam {
-    display: none;
-}
-.title {
+    height: 35px;
+    width: 35px;
+    background-color: white;
+    border-radius: 5px;
+    position: fixed;
+    left: 4px;
+    z-index: 9999;
     display: grid;
-    justify-items: center;
+    border: 0.5px solid black;
+    place-content: center;
 }
-.link {
+.nyam span {
+    height: 2px;
+    width: 20px;
+    background-color: grey;
+}
+.nyam span::before {
+    content: '';
+    height: 2px;
+    width: 20px;
+    background-color: grey;
+    position: absolute;
+    top: 8px;
+}
+.nyam span::after {
+    content: '';
+    height: 2px;
+    width: 20px;
+    background-color: grey;
+    position: absolute;
+    top: 25px;
+}
+.nyam:hover {
+    background-color: rgb(200, 200, 200);
+}
+
+aside {
+    position: fixed;
+    width: 180px;
+    height: 100%;
+    background-color: rgb(240, 240, 240);
+    transform: translateX(-100%);
     display: grid;
-    grid-template-columns: repeat(4, auto);
-    place-items: center;
+    padding-left: 10px;
+    padding-top: 10px;
 }
+
 /* main */
 main {
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-left: 5px;
     display: grid;
     justify-content: center;
 }
@@ -41,12 +80,13 @@ main {
     display: grid;
     grid-template-rows: repeat(auto-fit, auto-fit);
     row-gap: 20px;
-    justify-items: center;
 }
 .home img {
     width: 200px;
     border-radius: 50%;
 }
+
+/* option */
 .upload, .addDesc {
     /* display: block; */
     position: fixed;
@@ -63,14 +103,52 @@ main {
     padding: 20px;
     display: grid;
     grid-template-rows: repeat(auto-fit, auto-fit);
+    row-gap: 10px;
+    border-radius: 5px;
 }
 .uploads {
     display: grid;
 }
-.prevs {
+.prevProfile {
     width: 200px;
     border-radius: 10px;
 }
-.option div {
 
+/* button */
+button {
+    padding: 10px 20px;
+    background-color: rgb(66, 135, 245);
+    border: 1px solid rgb(66, 135, 245);
+    border-radius: 5px;
+    color: white;
+}
+button:hover {
+    background-color: rgb(25, 110, 248);
+    border: 1px solid rgb(25, 110, 248);
+}
+
+.open {
+
+    animation: asideslide 0.5s forwards;
+}
+.openc {
+    animation: openc 0.5s forwards;
+}
+@keyframes asideslide {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+@keyframes openc {
+    0% {
+        /* margin-left: 0px; */
+        transform: translateX(0%);
+    }
+    100% {
+        /* margin-left: 220px; */
+        transform: translateX(185px);
+    }
 }
