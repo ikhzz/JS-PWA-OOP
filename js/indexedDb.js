@@ -2,11 +2,12 @@ class IndexedDB {
   _db_name = 'iNotes';
   _db_version = 1;
   _db_tOne = 'profile';
+  _db_tTwo = 'posts'
   
   constructor() {
     this.startDB()
-    this.loadProfile()
-    this.loadDesc()
+    //this.loadProfile()
+    //this.loadDesc()
   }
 
   startDB = () => {
@@ -14,6 +15,7 @@ class IndexedDB {
       const open = indexedDB.open(this._db_name, this._db_version)
       open.onupgradeneeded = e => {
         e.target.result.createObjectStore(this._db_tOne, {keyPath : 'id', unique : true});
+        e.target.result.createObjectStore(this._db_tTwo, {keyPath : 'id', autoIncrement:true});
       }
       open.onsuccess = e => {
         console.log('INDEXEDDB IS INVOKED!!!!!!');
@@ -104,13 +106,30 @@ class IndexedDB {
                 tx = db.transaction(this._db_tOne, 'readwrite'),
                 request = tx.objectStore(this._db_tOne),
                 data = {id : `${input[0].value}`, desc : `${input[1].value}`}
-        request.put(data)
-        this.loadDesc()
+          request.put(data)
+          this.loadDesc()
         }
       console.log('success')
       
     }
     pages.upToggle()
+  }
+  
+  addPosts = (value) => {
+    const open = indexedDB.open(this._db_name, this._db_version),
+          date = new Date,
+          dates = [date.getDate(), date.getMonth(), date.getFullYear()],
+          time = [date.getHours(),date.getMinutes()],
+          values = value.getAttribute('value'),
+          moods = value.innerHTML
+
+    open.onsuccess = () => {
+      const db = open.result,
+            tx = db.transaction(this._db_tTwo, 'readwrite'),
+            request = tx.objectStore(this._db_tTwo),
+            data = {type : 'mood', date : dates, time : time, mood : moods, val : values}
+      request.add(data)
+    }
   }
 }
 
