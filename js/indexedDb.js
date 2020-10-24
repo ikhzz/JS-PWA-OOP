@@ -115,20 +115,45 @@ class IndexedDB {
     pages.upToggle()
   }
   
-  addPosts = (value) => {
+  addPosts = (types, moods, values) => {
     const open = indexedDB.open(this._db_name, this._db_version),
           date = new Date,
           dates = [date.getDate(), date.getMonth(), date.getFullYear()],
-          time = [date.getHours(),date.getMinutes()],
-          values = value.getAttribute('value'),
-          moods = value.innerHTML
-
+          mnt = date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes(),
+          time = [date.getHours(), mnt],
+          pages = new Pages
+    
     open.onsuccess = () => {
       const db = open.result,
             tx = db.transaction(this._db_tTwo, 'readwrite'),
             request = tx.objectStore(this._db_tTwo),
-            data = {type : 'mood', date : dates, time : time, mood : moods, val : values}
+            data = {type : types, date : dates, time : time, mood : moods, val : values}
       request.add(data)
+    }
+    this.loadPosts()
+    pages.upToggle()
+  }
+  loadPosts = () => {
+    const open = indexedDB.open(this._db_name, this._db_version),
+          posts = document.querySelector('.posts')
+    let   el = 'moods'
+
+    open.onsuccess = () => {
+      const db = open.result,
+            tx = db.transaction(this._db_tTwo, 'readonly'),
+            store = tx.objectStore(this._db_tTwo),
+            request = store.getAll()
+            request.onsuccess = e => {
+              posts.innerHTML = ''
+              e.target.result.forEach(e => {
+                el = e.type == 'mood' ? 'moods' : 'p';
+                posts.innerHTML += `
+                  <li>
+                    <h3>&#128336; : ${e.time[0]}:${e.time[1]}</h3>
+                    <${el}>${e.mood}</${el}>
+                  </li>`;
+              })
+            }
     }
   }
 }

@@ -5,16 +5,26 @@ const pages = new Pages;
 document.querySelector('.mood').addEventListener('click', ()=> {
   document.querySelector('.addMood').classList.toggle('uploads')
 })
+document.querySelector('.thought').addEventListener('click', ()=> {
+  document.querySelector('.addThought').classList.toggle('uploads')
+})
 document.querySelectorAll('.moods').forEach(e => {
   e.addEventListener('click', ()=> {
-    pages.addPosts(e)
-    console.log(e.getAttribute('value'))
-    console.log(e.innerHTML)
+    pages.addPosts('mood', e.innerHTML, e.getAttribute('value'))
+    //console.log(e.getAttribute('value'))
+    //console.log(e.innerHTML)
     // time, date
+
   })
 })
+document.querySelector('.confirmThought').addEventListener('click', () => {
+  const a = document.querySelector('.thoughts')
+  console.log(a.value)
+  console.log(a)
+  pages.addPosts('thought', a.value, '0')
+})
 
-
+pages.loadPosts()
 
 
 

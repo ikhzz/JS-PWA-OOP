@@ -75,6 +75,8 @@ main {
     margin-left: 5px;
     display: grid;
     justify-content: center;
+    row-gap: 10px;
+    width: 100%;
 }
 .home {
     display: grid;
@@ -87,7 +89,7 @@ main {
 }
 
 /* option */
-.upload, .addDesc, .addMood {
+.upload, .addDesc, .addMood, .addThought {
     /* display: block; */
     position: fixed;
     top: 0;
@@ -194,6 +196,7 @@ button:hover {
     grid-template-columns: auto auto auto auto;
     gap: 10px;
 }
+
 /* mood */
 .moodMenu {
     padding-bottom: 10px;
@@ -210,7 +213,9 @@ button:hover {
     /* 2 icon =100px, 3 icon = 63px */
     cursor: pointer;
 }
-
+moods {
+    font-size: 63px;
+}
 @media screen and (max-width:567px) {
     .b {
     grid-template-columns: auto auto;
@@ -223,23 +228,30 @@ button:hover {
 
 /* experimental */
 
-
-.edu::before, .exp::before{
+.posts::before {
     content: '';
     width: 2px;
     position: absolute;
-    height: 94.5%;
+    height: 100%;
     background-color: red;
+    overflow: hidden;
+    top: 0px;
 }
-.edu, .exp {
+.posts {
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.9);
     border-radius: 10px;
     padding: 20px;
     background-color: rgb(230, 230, 230);
     position: relative;
     color: black;
+    margin-bottom: 10px;
+
+    width: 98%;
+    height: 100%;
+    box-sizing: border-box;
+
 }
-.edu li::before, .exp li::before{
+.posts li::before {
     content: '';
     width: 10px;
     height: 10px;
@@ -247,14 +259,18 @@ button:hover {
     left: 16px;
     background-color: red;
     border-radius: 50%;
+    
 }
-.edu li, .exp li {
+.posts li {
     margin-bottom: 20px;
     margin-left: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    overflow-wrap: anywhere;
 }
-.edu li:last-child, .exp li:last-child {
+.posts li:last-child {
     margin-bottom: 0px;
 }
-.edu li h6, .edu li h4, .exp li h6, .exp li h4 {
+.posts li * {
     margin-bottom: 10px;
 }
