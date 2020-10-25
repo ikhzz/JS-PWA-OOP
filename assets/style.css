@@ -7,6 +7,7 @@
 body {
     
     font-family: sans-serif;
+    overflow-x: hidden;
 }
 /* navigation */
 
@@ -76,7 +77,7 @@ main {
     display: grid;
     justify-content: center;
     row-gap: 10px;
-    width: 100%;
+
 }
 .home {
     display: grid;
@@ -87,7 +88,11 @@ main {
     width: 200px;
     border-radius: 50%;
 }
-
+.desc {
+    display: grid;
+    grid-template-columns: auto auto;
+    overflow-wrap: anywhere;
+}
 /* option */
 .upload, .addDesc, .addMood, .addThought {
     /* display: block; */
@@ -130,9 +135,7 @@ button:hover {
     background-color: rgb(25, 110, 248);
     border: 1px solid rgb(25, 110, 248);
 }
-/* .btnDay span {
-    font-size: 10px;
-} */
+
 
 /* burger and main slide */
 .open {
@@ -169,7 +172,6 @@ button:hover {
 .clock {
     display: grid;
     grid-template-columns: 85px 85px;
-    /* justify-items: space-between; */
     justify-content: center;
     gap: 10px;
 }
@@ -204,13 +206,9 @@ button:hover {
     grid-template-columns: repeat(6, auto);
 }
 .moods {
-    /* width: 100px;
-    height: 100000px; */
     padding: 10px;
-    /* background-color: grey; */
     box-sizing: border-box;
     font-size: 63px; 
-    /* 2 icon =100px, 3 icon = 63px */
     cursor: pointer;
 }
 moods {
@@ -224,20 +222,28 @@ moods {
     .moodMenu {
     grid-template-columns: repeat(3, auto);
     }
+    .posts {
+        margin-left: 5px;
+    }
+    .stats {
+        grid-area: 1 / span 2;
+    }
+    .history {
+        grid-area: 2 / span 3;
+    }
 }
 
 /* experimental */
 
-.posts::before {
+.posts::before, .history::before {
     content: '';
     width: 2px;
     position: absolute;
     height: 100%;
     background-color: red;
-    overflow: hidden;
     top: 0px;
 }
-.posts {
+.posts, .history {
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.9);
     border-radius: 10px;
     padding: 20px;
@@ -245,13 +251,11 @@ moods {
     position: relative;
     color: black;
     margin-bottom: 10px;
-
     width: 98%;
-    height: 100%;
     box-sizing: border-box;
-
+    height: 100%;
 }
-.posts li::before {
+.posts li::before, .history li::before {
     content: '';
     width: 10px;
     height: 10px;
@@ -261,16 +265,64 @@ moods {
     border-radius: 50%;
     
 }
-.posts li {
+.posts li, .history li {
     margin-bottom: 20px;
     margin-left: 20px;
     box-sizing: border-box;
     width: 100%;
     overflow-wrap: anywhere;
 }
-.posts li:last-child {
+.posts li:last-child, .history li:last-child {
     margin-bottom: 0px;
 }
-.posts li * {
+.posts li *, .history li * {
     margin-bottom: 10px;
+}
+
+/* exp 2 */
+.status {
+    display: grid;
+    position: relative;
+    column-gap: 40px;
+    row-gap:  20px;
+    grid-template-columns: 300px 1fr;
+}
+.stats {
+    width: 300px;
+    height: 300px;
+    display: grid;
+    align-items: end;
+    justify-items: center;
+    position: relative;
+}
+.meter {
+    width: 200px;
+    height: 200px;
+    display: grid;
+    margin-bottom: 10px;
+}
+.mtr {
+    display: grid;
+    border-radius: 50%;
+    justify-self: center;
+    align-items: end;
+    transform-origin: bottom center;
+}
+.mtr::before {
+    content: '';
+    width: 6px;
+    height: 100px;
+    background: black;
+    z-index: 3;
+    border-radius: 6px 6px 0 0;
+}
+.value {
+    width: 250px;
+    height: 125px;
+    background-color: rgb(220, 220, 220);
+    position: absolute;
+    border-radius: 125px 125px 0 0;
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: auto auto;
 }

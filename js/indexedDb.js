@@ -1,15 +1,10 @@
+import {Pages} from './pages.js'
 class IndexedDB {
   _db_name = 'iNotes';
   _db_version = 1;
   _db_tOne = 'profile';
   _db_tTwo = 'posts'
   
-  constructor() {
-    this.startDB()
-    //this.loadProfile()
-    //this.loadDesc()
-  }
-
   startDB = () => {
     if(window.indexedDB) {
       const open = indexedDB.open(this._db_name, this._db_version)
@@ -59,10 +54,12 @@ class IndexedDB {
               store = tx.objectStore(this._db_tOne),
               request = store.getAll()
               request.onsuccess = e => {
+                window.delDesc = this.delDesc
                 e.target.result.forEach(e => {
                   if(e.id != 'profPic'){
                     desc.innerHTML += `
-                    <p>${e.id} : ${e.desc}`
+                      <p>${e.id} : ${e.desc}</p><button onclick="delDesc('${e.id}')">Delete</button>
+                    `
                   }
                 })
               }
@@ -135,7 +132,9 @@ class IndexedDB {
   }
   loadPosts = () => {
     const open = indexedDB.open(this._db_name, this._db_version),
-          posts = document.querySelector('.posts')
+          posts = document.querySelector('.posts'),
+          date = new Date,
+          today = [date.getDate(), date.getMonth(), date.getFullYear()]
     let   el = 'moods'
 
     open.onsuccess = () => {
@@ -146,55 +145,87 @@ class IndexedDB {
             request.onsuccess = e => {
               posts.innerHTML = ''
               e.target.result.forEach(e => {
-                el = e.type == 'mood' ? 'moods' : 'p';
-                posts.innerHTML += `
+                if(JSON.stringify(today) == JSON.stringify(e.date)) {
+                  el = e.type == 'mood' ? 'moods' : 'p';
+                  posts.innerHTML += `
                   <li>
                     <h3>&#128336; : ${e.time[0]}:${e.time[1]}</h3>
                     <${el}>${e.mood}</${el}>
                   </li>`;
+                }
               })
             }
     }
   }
-}
 
-class Pages extends IndexedDB {
-  loadPages = (page) => {
-    fetch(page)
-      .then(res => res.text())
-      .then(res => {
-          document.querySelector('.content').innerHTML = res
-    })
-  }
-
-  upToggle = () => {
-    document.querySelectorAll('.option>div').forEach(e => {
-      if(e.classList.contains('uploads'))
-        e.classList.toggle('uploads')
-    })
-    setTimeout(()=>{
-      document.querySelector('.prevProfile').setAttribute('src','')
-      document.querySelector('.inputPic').value = '';
-      document.querySelectorAll('.addDesc input').forEach(e => e.value = '')
-    }, 1000)
-    
-  }
-
-  prev = () => {
-    const file = document.querySelector('.inputPic').files[0],
-          filetype = ['image/jpeg', 'image/png', 'image/jpg', 'image/bmp', 'image/gif'],
-          reader = new FileReader;
-    if(file !== undefined) 
-      if(filetype.includes(file.type)) {
-              reader.readAsDataURL(file)
-              reader.onload = e => {
-                document.querySelector('.prevProfile').setAttribute('src', e.target.result)
-              }
-      } else {
-        document.querySelector('.inputPic').value = ''
-        document.querySelector('.prevProfile').setAttribute('src','')
+  loadStats = () => {
+    return new Promise (resolve => {
+      let i = 0,
+          sum = 0
+      const open = indexedDB.open(this._db_name, this._db_version),
+            tes = (item) => {sum += item}
+      
+      
+      open.onsuccess = () => {
+        const db = open.result,
+              tx = db.transaction(this._db_tTwo, 'readonly'),
+              store = tx.objectStore(this._db_tTwo),
+              request = store.getAll()
+        request.onsuccess = e => {
+          
+          e.target.result.forEach(e => {
+            if(e.type == 'mood') {
+              tes(parseInt(e.val))
+              i++
+            }
+          })
+          resolve([i,sum]) 
+        }
       }
+    })
+  }
+
+  loadHistory = () => {
+    const open = indexedDB.open(this._db_name, this._db_version),
+          posts = document.querySelector('.history'),
+          date = new Date,
+          today = [date.getDate(), date.getMonth(), date.getFullYear()]
+    let   el = 'moods'
+
+    open.onsuccess = () => {
+      const db = open.result,
+            tx = db.transaction(this._db_tTwo, 'readonly'),
+            store = tx.objectStore(this._db_tTwo),
+            request = store.getAll()
+            request.onsuccess = e => {
+              posts.innerHTML = ''
+              e.target.result.forEach(e => {
+
+                  el = e.type == 'mood' ? 'moods' : 'p';
+                  posts.innerHTML += `
+                  <li>
+                    <h2>Date : ${e.date[0]}-${e.date[1]}-${e.date[2]}</h2>
+                    <h3>&#128336; : ${e.time[0]}:${e.time[1]}</h3>
+                    <${el}>${e.mood}</${el}>
+                  </li>`;
+                
+              })
+            }
+    }
+  }
+
+  delDesc = (id) => {
+    const open = indexedDB.open(this._db_name, this._db_version)
+    open.onsuccess = () => {
+      const   db = open.result,
+                tx = db.transaction(this._db_tOne, 'readwrite'),
+                request = tx.objectStore(this._db_tOne)
+      request.delete(id)
+    }
   }
 }
 
-export {IndexedDB, Pages}
+const init = new IndexedDB
+init.startDB()
+
+export {IndexedDB}

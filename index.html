@@ -4,6 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="assets/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#00897B"/>
+  <link rel="apple-touch-icon" href="assets/img/pwa-192x192.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="assets/img/ios-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/ios-180x180.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="assets/img/ios-167x167.png">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="shortcut icon" href="assets/img/pwa-192x192.png">
+  <link href="assets/img/ios-750x1334.png" sizes="750x1334" rel="apple-touch-startup-image" />
+  <link href="assets/img/ios-1242x2208.png" sizes="1242x2208" rel="apple-touch-startup-image" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <title>Notes App</title>
 </head>
 <body>
@@ -17,77 +29,18 @@
     </header>
     <aside>
       <ul class="link">
-        <li><a href="">Home</a></li>
-        <li><a>Your Day</a></li>
-        <li><a>Statistic</a></li>
-        <li><a>Notes</a></li>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#yDay">Your Day</a></li>
+        <li><a href="#status">Status</a></li>
       </ul>
     </aside>
   
 
   <main class="content">
-    <div class="yDay">
-      <div class="clock">
-        <div><span class="hrs">00</span></div>
-        <div><span class="min">00</span></div>
-        <span class="btnDay">How is your day ?</span>
-      </div>
-      <div class="b">
-        <button class="mood">&#10133; Mood</button>
-        <!-- <button>&#10133; Opinion</button>
-        <button>&#10133; Notes</button> -->
-        <button class="thought">&#10133; Thoughts</button>
-      </div>
-    </div>
-    <div class="option">
-      <div class="addMood">
-        <div class="addMenu">
-          <div class="moodMenu">
-            <mood class="moods" value="-3">&#128557;</mood>
-            <mood class="moods" value="-2">&#128542;</mood>
-            <mood class="moods" value="-1">&#128577;</mood>
-            <mood class="moods" value="1">&#128578;</mood>
-            <mood class="moods" value="2">&#128513;</mood>
-            <mood class="moods" value="3">&#128514;</mood>
-          </div>
-          <div class="btn">
-            <button class="cancel">Cancel</button>
-          </div>
-        </div>
-      </div>
-      <div class="addThought">
-        <div class="addMenu">
-          <div class="ThoughtMenu">
-            <label for="thought">What are you thinking ?</label>
-            <input type="text" name="thought" class="thoughts">
-          </div>
-          <div class="btn">
-            <button class="confirmThought">Confirm</button>
-            <button class="cancel">Cancel</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
-
-      <ul class="posts">
-        <li>
-          <h6>&#128198; Time</h6>
-          <h4>Post</h4>
-        </li>
-        <li>
-            <h6>&#128198; 2007-2010</h6>
-            <h4>Graduate Highschool</h4>
-        </li>
-        <li>
-            <h6>&#128198; 2004-2007</h6>
-            <h4>Graduate Junior high school </h4>
-        </li>
-      </ul>
-
-    
   </main>
   <script type="module" src="js/index.js"></script>
   <script type="module" src="js/indexedDb.js"></script>
+  <script type="module" src="js/sw-register.js"></script>
 </body>
 </html>
