@@ -1,5 +1,6 @@
 import {Pages} from './pages.js';
 const pages = new Pages;
+pages.startDB()
 pages.loadPages('home')
 
 let links = document.querySelectorAll('.link li a')

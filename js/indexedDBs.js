@@ -1,4 +1,5 @@
-import {Pages} from './pages.js'
+import {Pages} from './pages.js';
+
 class IndexedDB {
   _db_name = 'iNotes';
   _db_version = 1;
@@ -225,7 +226,5 @@ class IndexedDB {
   }
 }
 
-const init = new IndexedDB
-init.startDB()
 
 export {IndexedDB}
