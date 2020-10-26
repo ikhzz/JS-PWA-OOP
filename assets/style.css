@@ -77,7 +77,7 @@ main {
     display: grid;
     justify-content: center;
     row-gap: 10px;
-
+    justify-items: center;
 }
 .home {
     display: grid;
