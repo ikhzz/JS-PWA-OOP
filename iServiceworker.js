@@ -9,7 +9,7 @@ const urlsToCache = [
   "assets/style.css",
   "js/index.js",
   "js/sw-register.js",
-  "js/indexedDB.js",
+  "js/indexedDBs.js",
   "js/pages.js",
   "assets/img/logo.JPG",
   "assets/img/maskable_192x192.png",

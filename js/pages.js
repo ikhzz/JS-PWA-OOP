@@ -1,4 +1,4 @@
-import {IndexedDB} from './indexedDB.js'
+import {IndexedDB} from './indexedDBs.js'
 
 class Pages extends IndexedDB {
     loadPages = (data) => {
