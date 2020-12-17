@@ -1,328 +1,288 @@
-* {
-    text-decoration: none;
-    list-style-type: none;
+/* Global style */
+body{
     margin: 0;
     padding: 0;
 }
-body {
-    
-    font-family: sans-serif;
-    overflow-x: hidden;
+@font-face {
+    font-family: 'Andika New Basic';
+    src: url(./AndikaNewBasic\ /AndikaNewBasic-Regular.ttf);
 }
-/* navigation */
-
-header {
-    padding: 5px 0;
-    /* display: table; */
-    display: grid;
-    position: relative;
+* {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: 'Andika New Basic', 'Arial', 'sans-serif';
 }
-
-.title {
-    margin-left: 50px;
+a,a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
 }
-
-.nyam {
-    height: 35px;
-    width: 35px;
-    background-color: white;
-    border-radius: 5px;
-    position: fixed;
-    left: 4px;
-    z-index: 1;
-    display: grid;
-    border: 0.5px solid black;
-    place-content: center;
+button{
+    background-color: rgb(52, 126, 247);
+    border: 1px solid rgb(27, 110, 243);
+    padding: 2px 8px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 1px 2px rgb(95, 154, 248);
+    margin-right: 10px;
 }
-.nyam span {
-    height: 2px;
-    width: 20px;
-    background-color: grey;
-}
-.nyam span::before {
-    content: '';
-    height: 2px;
-    width: 20px;
-    background-color: grey;
-    position: absolute;
-    top: 8px;
-}
-.nyam span::after {
-    content: '';
-    height: 2px;
-    width: 20px;
-    background-color: grey;
-    position: absolute;
-    top: 25px;
-}
-.nyam:hover {
-    background-color: rgb(200, 200, 200);
+button:hover{
+    background-color: rgb(95, 154, 248);
 }
 
-aside {
-    position: fixed;
-    width: 180px;
+/* Background */
+.background{
+    background-color: #f1f6f9;
     height: 100%;
-    background-color: rgb(240, 240, 240);
-    transform: translateX(-100%);
-    display: grid;
-    padding-left: 10px;
-    padding-top: 10px;
+    position: absolute;  
+    z-index: -1; 
 }
 
-/* main */
-main {
-    margin-top: 10px;
-    margin-left: 5px;
-    display: grid;
-    justify-content: center;
-    row-gap: 10px;
-}
-.home {
-    display: grid;
-    grid-template-rows: repeat(auto-fit, auto-fit);
-    row-gap: 20px;
-    justify-items: center;
-}
-.home img {
-    width: 200px;
-    border-radius: 50%;
-}
-.desc {
-    display: grid;
-    grid-template-columns: auto auto;
-    overflow-wrap: anywhere;
-}
-/* option */
-.upload, .addDesc, .addMood, .addThought {
-    /* display: block; */
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none;
-    place-content: center;
+/* Snackbar */
+.snackbar{
+    position: absolute;
     z-index: 2;
-
+    display: none;
+    justify-content: center;
+    width: 100%;
 }
-.addMenu {
-    background-color: white;
-    padding: 20px;
+.snackbarShow {
     display: grid;
-    grid-template-rows: repeat(auto-fit, auto-fit);
-    gap: 10px;
+}
+.snackbar * {
+    background-color: black;
+    animation: slide2 1.5s forwards ;
+    color: white;
+    padding: 10px;
+    border-radius: 20px;
+}
+@keyframes slide2 {
+    0% {
+        opacity: 0;
+        transform: translateY(0px);
+    } 100% {
+        opacity: 1;
+        transform: translateY(50px);
+    }
+}
+/* Option */
+.option{
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.2);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    place-content: center;
+    z-index: 3;
+}
+.option > li{
+    background-color: #9ba4b4;
+    width: fit-content;
+    height: fit-content;
+    padding: 20px 10px;
     border-radius: 5px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.9);
+    justify-items: center;
+    animation: slide 1s forwards;
 }
-.uploads {
+@keyframes slide {
+    0%{
+        opacity: 0;
+        transform: translateY(-100px);
+    } 100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+.changePicture, .addDescription, .addMood, .addThought{
+    display: none;
+    row-gap: 20px;
+}
+
+.addDescription div:nth-child(3), .addDescription div:nth-child(2) {
     display: grid;
+    grid-template-columns: 90px auto;
+    justify-self: start;
 }
 .prevProfile {
     width: 200px;
     border-radius: 10px;
 }
-
-/* button */
-button {
-    padding: 10px 20px;
-    background-color: rgb(66, 135, 245);
-    border: 1px solid rgb(66, 135, 245);
-    border-radius: 5px;
-    color: white;
-}
-button:hover {
-    background-color: rgb(25, 110, 248);
-    border: 1px solid rgb(25, 110, 248);
-}
-
-
-/* burger and main slide */
-.open {
-    animation: asideslide 0.5s forwards;
-}
-.openc {
-    animation: openc 0.5s forwards;
-}
-@keyframes asideslide {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(0%);
-    }
-}
-@keyframes openc {
-    0% {
-        transform: translateX(0%);
-    }
-    100% {
-        transform: translateX(185px);
-    }
-}
-
-/* yDay */
-.yDay {
-    display: grid;
-    gap: 10px;
-    justify-content: center;
-
-}
-/* clock */
-.clock {
-    display: grid;
-    grid-template-columns: 85px 85px;
-    justify-content: center;
-    gap: 10px;
-}
-.clock div {
-    width: 85px;
-    height: 80px;
-    background-color: blue;
-    display: grid;
-    place-content: center;
-    color: white;
-    font-size: 50px;
-    border-radius: 4px;
-}
-.btnDay {
-    grid-column: 1 / span 2;
-    background-color: rgb(66, 135, 245);
-    margin: 0 auto;
-    padding: 10px 20px;
-    border-radius: 5px;
-    color: white;
-}
-.b {
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    gap: 10px;
-}
-
-/* mood */
-.moodMenu {
-    padding-bottom: 10px;
-    display: grid;
-    grid-template-columns: repeat(6, auto);
-}
-.moods {
-    padding: 10px;
-    box-sizing: border-box;
-    font-size: 63px; 
+mood {
+    font-size: 57px;
     cursor: pointer;
 }
-moods {
-    font-size: 63px;
-}
-@media screen and (max-width:567px) {
-    .b {
-    grid-template-columns: auto auto;
-    }
 
-    .moodMenu {
-    grid-template-columns: repeat(3, auto);
-    }
-    .posts {
-        margin-left: 5px;
-    }
-    .stats {
-        grid-area: 1 / span 2;
-    }
-    .history {
-        grid-area: 2 / span 3;
-    }
-}
-
-/* experimental */
-
-.posts::before, .history::before {
-    content: '';
-    width: 2px;
-    position: absolute;
-    height: 100%;
-    background-color: red;
-    top: 0px;
-}
-.posts, .history {
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.9);
-    border-radius: 10px;
-    padding: 20px;
-    background-color: rgb(230, 230, 230);
-    position: relative;
-    color: black;
-    margin-bottom: 10px;
-    width: 98%;
-    box-sizing: border-box;
-    height: 100%;
-}
-.posts li::before, .history li::before {
-    content: '';
-    width: 10px;
-    height: 10px;
-    position: absolute;
-    left: 16px;
-    background-color: red;
-    border-radius: 50%;
-    
-}
-.posts li, .history li {
-    margin-bottom: 20px;
-    margin-left: 20px;
-    box-sizing: border-box;
+/* Nav */
+nav{
+    height: fit-content;
     width: 100%;
-    overflow-wrap: anywhere;
+    display: grid;
+    justify-items: center;
+    grid-template-rows: auto auto;
 }
-.posts li:last-child, .history li:last-child {
-    margin-bottom: 0px;
+nav ul{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 20px;
+    background-color: #394867;
+    padding: 5px 20px;
+    color: white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.9);
 }
-.posts li *, .history li * {
-    margin-bottom: 10px;
+nav ul li{
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+nav ul li:hover{
+    background-color: #526180;   
+}
+nav div{
+    display: grid;
+    width: 100%;
+    background-color: #14274e;
+    color: white;
+    justify-content: center;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.9);
 }
 
-/* exp 2 */
-.status {
+/* Main */
+.content {
+    margin-top: 20px;
     display: grid;
-    position: relative;
-    column-gap: 40px;
-    row-gap:  20px;
-    grid-template-columns: 300px 1fr;
+    width: 100%;
+    height: fit-content;
 }
-.stats {
-    width: 300px;
-    height: 300px;
+/* General main content style */
+.content, .home, .yourDay, .history{
     display: grid;
-    align-items: end;
+    width: 100%;
+    height: fit-content;
+}
+.home, .yourDay, .history{
     justify-items: center;
+}
+.home *:not(:last-child), .yourDay *:not(:last-child), .history *:not(:last-child){
+    margin-bottom: 10px;
+}
+.desc, .moodAndThought, .listHistory{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 280px);
+    grid-template-rows: repeat(auto-fit, minmax(fit-content, auto));
+    gap: 10px 10px;
+    width: 80%;
+    justify-content: center;
+}
+.moodAndThought li, .listHistory li, .desc li {
+    display: grid;
+    grid-template-rows: 30px auto;
+    background-color: #748299;
+    width: 100%;
+    height: 150px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px 10px;
+    box-sizing: border-box;
+    align-items: flex-start;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.9);
     position: relative;
 }
-.meter {
+.desc h3, .moodAndThought h3, .moodAndThought mood, .listHistory h3, .listHistory mood{
+    justify-self: end;
+    padding: 4px 6px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 2px 2px white;
+    background-color: #393e46;
+    color: rgb(180, 180, 180);
+    min-height: fit-content;
+    max-height: 80px;
+    max-width: 240px;
+    overflow-y: scroll;
+    cursor: default;
+}
+
+/* Home */
+.profPic{
+    width: fit-content;
+    height: fit-content;
+    border-radius: 50%;
+}
+.profPic img{
     width: 200px;
     height: 200px;
-    display: grid;
-    margin-bottom: 10px;
-}
-.mtr {
-    display: grid;
     border-radius: 50%;
-    justify-self: center;
-    align-items: end;
-    transform-origin: bottom center;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.9);
 }
-.mtr::before {
-    content: '';
-    width: 6px;
-    height: 100px;
-    background: black;
-    z-index: 3;
-    border-radius: 6px 6px 0 0;
+.bubble{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 2px 6px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.9);
 }
-.value {
-    width: 250px;
-    height: 125px;
-    background-color: rgb(220, 220, 220);
+.home .desc li {
+    height: fit-content;
+}
+.desc h3 {
+    max-height: 120px;
+}
+.desc p {
+    height: 30px;
+    overflow-y: hidden;
+}
+
+.deleteDesc {
+    display: none;
     position: absolute;
-    border-radius: 125px 125px 0 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    place-items: center;
+}
+
+/* YourDay */
+.dailyBackground {
+    width: 85%;
+    height: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     display: grid;
-    justify-content: space-between;
-    grid-template-columns: auto auto;
+    justify-items: center;
+    align-items: flex-end;
+}
+.dailyBackground .bubble {
+    margin-bottom: 10px;
+    background-color: white;
+}
+
+.moodAndThought mood {
+    padding: 1px 10px;
+}
+/* History */
+
+/* Mobile screen setting */
+/* Background container when width is over one thousand!!! */
+@media screen and (min-width: 1000px){
+    .background{
+        width: 90%;
+        margin: 38px 5% 0px;
+    }
+    .desc{
+        width: 85%;
+    }
+    .deleteDesc.descMenu {
+        display: grid;
+    }
+}
+
+@media screen and (max-width: 999px){
+    .background{
+        width: 100%;
+        margin: 38px 0px 0px;
+    }
 }

@@ -11,36 +11,102 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/img/ios-180x180.png">
   <link rel="apple-touch-icon" sizes="167x167" href="assets/img/ios-167x167.png">
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <link rel="shortcut icon" href="assets/img/pwa-192x192.png">
+  <link rel="shortcut icon" href="assets/img/icon.JPG">
   <link href="assets/img/ios-750x1334.png" sizes="750x1334" rel="apple-touch-startup-image" />
   <link href="assets/img/ios-1242x2208.png" sizes="1242x2208" rel="apple-touch-startup-image" />
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <title>Notes App</title>
+  <title>Document</title>
 </head>
 <body>
-    <header>
-      <div class="nyam">
-        <span></span>
-      </div>
-      <div class="title">
-        <h1>iNotes</h1>
-      </div>
-    </header>
-    <aside>
-      <ul class="link">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#yDay">Your Day</a></li>
-        <li><a href="#status">Status</a></li>
-      </ul>
-    </aside>
+  <!-- Background -->
+  <div class="background"></div>
 
+  <!-- Snackbar -->
+  <div class="snackbar"><p>snackbar</p></div>
+
+  <!-- Nav/Title -->
+  <nav>
+    <div class="title"><h2>iNotes</h2></div>
+    <ul class="links">
+      <li><a href="#yourDay">Your Day</a></li>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#history">Status</a></li>
+    </ul>
+  </nav>
+
+  <!-- Option -->
+  <ul class="option">
+    <!-- Change picture option -->
+    <li class="changePicture">
+      <h3>Change Profile Picture ?</h3>
+      <img src="" alt="" class="prevProfile">
+      <input type="file" class="inputPic">
+      <div>
+        <label for="style">Choose style:</label>
+        <select id="style">
+          <option value="10px">Normal</option>
+          <option value="50%">Round</option>
+        </select>
+      </div>
+      <div>
+        <button class="confirmChangePicture">Confirm</button>
+        <button class="cancel">Cancel</button>
+      </div>
+    </li>
+
+    <!-- Add description option -->
+    <li class="addDescription">
+      <h3>Add Profile Description ?</h3>
+      <div>
+        <label for="title">Title</label>
+        <input name="title" type="text" class="profTitle">
+      </div>
+      <div>
+        <label for="desc">Description</label>
+        <input name="desc" type="text" class="profDesc">
+      </div>
+      <div class="btnProfile">
+        <button class="confirmAddDesc">Confirm</button>
+        <button class="cancel">Cancel</button>
+      </div>
+    </li>
+
+    <!-- Add moods option -->
+    <li class="addMood">
+      <h3>How is your mood ?</h3>
+      <ul>
+        <mood class="moods" value="-3">&#128557;</mood>
+        <mood class="moods" value="-2">&#128542;</mood>
+        <mood class="moods" value="-1">&#128577;</mood>
+        <mood class="moods" value="1">&#128578;</mood>
+        <mood class="moods" value="2">&#128513;</mood>
+        <mood class="moods" value="3">&#128514;</mood>
+      </ul>
+      <div>
+        <button class="cancel">Cancel</button>
+      </div>
+    </li>
+
+    <!-- Add thoughts option -->
+    <li class="addThought">
+      <h3>What is your thoughts ?</h3>
+      <div>
+        <label for="thought">Your Thoughts ?</label>
+        <input name="thought" type="text" class="thought">
+      </div>
+      <div>
+        <button class="confirmThought">Confirm</button>
+        <button class="cancel">Cancel</button>
+      </div>
+    </li>
+  </ul>
+
+  <!-- Content -->
   <main class="content"></main>
-  
-  
+  <!-- Script -->
   <script type="module" src="js/pages.js"></script>
   <script type="module" src="js/index.js"></script>
-  <script type="module" src="js/sw-register.js"></script>
-  <script type="module" src="js/indexedDBs.js"></script>
 </body>
 </html>

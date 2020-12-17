@@ -1,26 +1,22 @@
-import {Pages} from './pages.js';
-const pages = new Pages;
-pages.startDB()
+import {Pages} from './pages.js'
+
+const pages = new Pages,
+  links = document.querySelectorAll('.links li a')
+
 pages.loadPages('home')
-
-let links = document.querySelectorAll('.link li a')
-
-document.querySelector('.nyam').addEventListener('click', () => {
-  document.querySelector('aside').classList.toggle('open')
-  document.querySelector('main').classList.toggle('openc')
-})
-
 links.forEach(e => {
   e.addEventListener('click', ()=> {
     const page = e.getAttribute('href').split('#')[1]
     if(page === 'home') {
       pages.loadPages(page)
-    } else if (page === 'yDay') {
+    } else if (page === 'yourDay') {
       pages.loadPages(page)
-    } else if (page == 'status') {
+    } else if (page == 'history') {
       pages.loadPages(page)
     }
-    document.querySelector('aside').classList.toggle('open')
-    document.querySelector('main').classList.toggle('openc')
   })
+})
+
+document.querySelectorAll('.cancel').forEach(e =>{
+  e.addEventListener('click',pages.clear)
 })

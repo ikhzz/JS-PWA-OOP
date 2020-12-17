@@ -1,21 +1,28 @@
-const CACHE_NAME = "PWA-v2";
+const CACHE_NAME = "PWA-v1";
 const urlsToCache = [
   "/",
   "manifest.json",
   "index.html",
   "pages/home.html",
   "pages/yDay.html",
-  "pages/status.html",
+  "pages/history.html",
   "assets/style.css",
   "js/index.js",
   "js/sw-register.js",
-  "js/indexedDBs.js",
+  "js/indexedDb.js",
   "js/pages.js",
   "assets/img/logo.JPG",
   "assets/img/maskable_192x192.png",
   "assets/img/pwa-192x192.png",
   "assets/img/pwa-512x512.png",
-  "assets/img/IMG_0109.JPG"
+  "assets/img/IMG_0109.JPG",
+  "assets/img/day.jpg",
+  "assets/img/night.jpg",
+  "assets/img/icon.JPG",
+  "assets/AndikaNewBasic/AndikaNewBasic-Bold.ttf",
+  "assets/AndikaNewBasic/AndikaNewBasic-BoldItalic.ttf",
+  "assets/AndikaNewBasic/AndikaNewBasic-Italic.ttf",
+  "assets/AndikaNewBasic/AndikaNewBasic-Regular.ttf"
 ];
  
 self.addEventListener("install", event => {
