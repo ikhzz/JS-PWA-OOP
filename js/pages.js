@@ -197,9 +197,9 @@ class Pages extends IndexedDb {
     const a = (new Date).getHours();
     // Set hours image based on hours
     if(a > 5 && a < 18){
-      document.querySelector('.dailyBackground').style.backgroundImage = "url('/assets/img/day.jpg')";
+      document.querySelector('.dailyBackground').style.backgroundImage = "url('assets/img/day.jpg')";
     } else {
-      document.querySelector('.dailyBackground').style.backgroundImage = "url('/assets/img/night.jpg')";
+      document.querySelector('.dailyBackground').style.backgroundImage = "url('assets/img/night.jpg')";
     }
   };
 
